@@ -1,0 +1,75 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: #141414;
+  color: white;
+}
+
+#board {
+  display: flex;
+  width: 300px;
+  flex-wrap: wrap;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 45px;
+  font-family: 'Permanent Marker', cursive;
+  cursor: pointer;
+  user-select: none;
+}
+
+.square:hover {
+  background: rgba(91,91,91,0.2);
+}
+
+.square:nth-child(1), .square:nth-child(2), .square:nth-child(3) {
+    border-top: 0;
+}
+.square:nth-child(7), .square:nth-child(8), .square:nth-child(9) {
+    border-bottom: 0;
+}
+.square:nth-child(3n+1) {
+    border-left: 0;
+}
+.square:nth-child(3n) {
+    border-right: 0;
+}
+
+#game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#head {
+  font-size: 50px;
+  padding: 0 0 25px;
+  font-family: 'Patrick Hand SC', cursive;
+  font-style: italic;
+}
+
+#status {
+  padding-top: 15px;
+}
+
+.button {
+  margin: 50px;
+  padding: 12px 28px;
+  border-radius: 4px;
+  background-color: #e7e7e7;
+  color: black;
+  font-weight: bold;
+  font-size: 16px
+}
+
+.button:hover {
+  box-shadow: 0 8px 16px 0 rgba(200,200,200,0.2), 0 6px 20px 0 rgba(200,200,200,0.19);
+}
