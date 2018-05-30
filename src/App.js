@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   reset = (event) => {
-    let squares = event.target.previousElementSibling.children
+    let squares = event.target.parentElement.previousElementSibling.children
     this.setState({
       turn: 'X',
       gameEnded: false,
@@ -89,8 +89,8 @@ class App extends Component {
   render() {
     return (
       <div id="game">
-        <div id="status">{this.winnerLine()}</div>
         <div id="head">Tic Tac Toe</div>
+        <div id="status">{this.winnerLine()}</div>
         <div id="board" onClick={this.clicked}>
           <div className="square" data-square='0'></div>
           <div className="square" data-square='1'></div>
@@ -102,7 +102,10 @@ class App extends Component {
           <div className="square" data-square='7'></div>
           <div className="square" data-square='8'></div>
         </div>
-        <button className="button" onClick={this.reset}>Play again</button>
+        <div id="foot">
+          <button className="button" onClick={this.reset}>Play again</button>
+          <button className="button" onClick={this.reset}>Exit game</button>
+        </div>
       </div>
     );
   }
