@@ -11,7 +11,8 @@ class App extends Component {
       winner: '',
       gameDraw: false,
       board: Array(9).fill(''),
-      totalMoves: 0
+      totalMoves: 0,
+      winningCombo: null
     }
   }
 
@@ -25,26 +26,30 @@ class App extends Component {
       board: Array(9).fill(''),
       totalMoves: 0
     })
-    for (let i=0; i<squares.length; i++) {
-      squares[i].innerText = ""
+
+    for (let square of squares){
+      square.innerText = "";
+      square.style.color = "white";
     }
+
   }
 
   clicked = (event) => {
     if (this.state.board[event.target.dataset.square] === '' && !this.state.gameEnded) {
-      this.setState({ board: [...this.state.board, this.state.board[event.target.dataset.square] = this.state.turn]}, console.log(this.state.board))
       event.target.innerText = this.state.turn;
+      this.state.board[event.target.dataset.square] = this.state.turn
       this.setState({
         turn: this.state.turn === 'X' ? 'O' : 'X',
         board: this.state.board,
         totalMoves: ++this.state.totalMoves
       })
     }
+
     let result = this.checkWinner();
     if (result === 'X') {
       this.setState({
-        gameEnded: true,
-        winner: 'X'
+        winner: 'X',
+        gameEnded: true
       })
     } else if (result === 'O') {
       this.setState({
@@ -67,7 +72,8 @@ class App extends Component {
     ]
     let board = this.state.board
     for(let i=0; i<moves.length; i++){
-      if(board[moves[i][0]] === board[moves[i][1]] && board[moves[i][1]] === board[moves[i][2]]){
+      if(board[moves[i][0]] !== '' && board[moves[i][0]] === board[moves[i][1]] && board[moves[i][1]] === board[moves[i][2]]){
+        this.setState({winningCombo: moves[i]})
         return board[moves[i][0]]
       }
     }
@@ -82,7 +88,13 @@ class App extends Component {
 
   winnerLine = () => {
     if (this.state.gameEnded) {
-      return this.state.gameDraw ? "It's a draw!" : "Player " + this.state.winner + " won!"
+      let combo = this.state.winningCombo
+      let squares = document.getElementsByClassName("square")
+      let elems = []
+      for(let num of combo){elems.push(squares[num])}
+      elems.forEach(el => el.style.color = "red")
+
+      return this.state.gameDraw ? "It's a draw." : "Well done player " + this.state.winner + "!"
     }
   }
 
@@ -102,9 +114,9 @@ class App extends Component {
           <div className="square" data-square='7'></div>
           <div className="square" data-square='8'></div>
         </div>
-        <div id="foot">
+        <div className="btn-group">
           <button className="button" onClick={this.reset}>Play again</button>
-          <button className="button" onClick={this.reset}>Exit game</button>
+          <button className="button">Exit game</button>
         </div>
       </div>
     );
