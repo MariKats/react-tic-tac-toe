@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Board from './Board';
-import Welcome from './Welcome';
 import Footer from './Footer';
 
 export default class Game extends Component {
@@ -101,7 +100,7 @@ export default class Game extends Component {
   render() {
     return (
       <div className="game">
-        <Welcome message={this.message()}/>
+        <div className="navbar">{this.message()}</div>
         <Board clicked={this.handleClick} board={this.state.board}/>
         <Footer reset={this.reset}/>
       </div>

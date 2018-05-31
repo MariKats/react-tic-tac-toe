@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-import Welcome from './Welcome'
 import Board from './Board'
 import Footer from './Footer'
 
@@ -47,7 +46,7 @@ export default class OnePlayerGame extends Component {
           gameEnded: true,
           winningCombo: move,
           winner: board[move[0]]
-        })
+        },()=>console.log(this.state.winner))
       }
     }
   }
@@ -105,6 +104,7 @@ export default class OnePlayerGame extends Component {
   firstAvailable = () => {
     //first available that is free
     let board = this.state.board
+    console.log("first available")
     return board.findIndex(el => el === "")
   }
 
@@ -130,8 +130,11 @@ export default class OnePlayerGame extends Component {
       if (board[center] === "O") {
         let oppositesA = board[corners[0]] === "X" && board[corners[3]] === "X",
             oppositesB = board[corners[1]] === "X" && board[corners[2]] === "X"
-
         if (oppositesA||oppositesB) {board[middle[0]] = "O"}
+        else if (board[corners[0]] === "X" && board[middle[3]] === "X") {board[corners[2]]= "O"}
+        else if (board[corners[1]] === "X" && board[middle[3]] === "X") {board[corners[3]]= "O"}
+        else if (board[corners[2]] === "X" && board[middle[2]] === "X") {board[corners[3]]= "O"}
+        else if (board[corners[0]] === "X" && board[middle[2]] === "X") {board[corners[1]]= "O"}
         else {board[this.findIndex()]="O"}
       } else {board[this.findIndex()]="O"}
     }
@@ -163,7 +166,7 @@ export default class OnePlayerGame extends Component {
   render() {
     return (
       <div className="game">
-        <Welcome message={this.message()}/>
+        <div className="navbar">{this.message()}</div>
         <Board board={this.state.board} clicked={this.handleClick}/>
         <Footer reset={this.reset}/>
       </div>

@@ -1,5 +1,5 @@
 # refactor
-# responsive layout
+# responsive layout - OK
 # home page maybe
 # read me
 # tests

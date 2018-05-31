@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './App.css';
 import Game from './components/Game'
-// import Home from './components/Home'
 import OnePlayerGame from './components/OnePlayerGame'
 
 export default class App extends Component {
