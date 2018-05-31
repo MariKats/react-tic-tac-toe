@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Board from './Board';
 import Welcome from './Welcome';
+import Footer from './Footer';
 
 export default class Game extends Component {
   constructor(props){
@@ -16,14 +17,12 @@ export default class Game extends Component {
   }
 
   handleClick = (event) => {
-    var squareNo = event.target.dataset.square
-    var totalMoves = this.state.totalMoves
-    var board = this.state.board
+    var num = event.target.dataset.square
+    var { board, totalMoves, gameEnded } = this.state
 
-    if(board[squareNo] === '' && !this.state.gameEnded) {
+    if(board[num] === '' && !gameEnded) {
       ++totalMoves
-      var value = totalMoves % 2 === 0 ? 'O' : 'X'
-      board[squareNo] = value
+      board[num] = totalMoves % 2 === 0 ? 'O' : 'X'
       this.setState({totalMoves,board}, () => this.checkDraw())
     }
     this.checkWinner()
@@ -68,7 +67,7 @@ export default class Game extends Component {
       this.turnComboRed()
       return this.state.gameDraw ? "It's a draw." : "Well done player " + this.state.winner + "!"
     } else {
-      return "Tic Tac Toe"
+      return "2-Player Game"
     }
   }
 
@@ -101,12 +100,10 @@ export default class Game extends Component {
 
   render() {
     return (
-      <div id="game">
-        <Welcome status={this.message()}/>
+      <div className="game">
+        <Welcome message={this.message()}/>
         <Board clicked={this.handleClick} board={this.state.board}/>
-        <div className="btn-group">
-          <button className="button" onClick={this.reset}>Replay</button>
-        </div>
+        <Footer reset={this.reset}/>
       </div>
     );
   }
