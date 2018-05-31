@@ -11,6 +11,7 @@ export default class App extends Component {
     return (
       <Router>
         <div>
+          <Route exact path="/" component={OnePlayerGame} />
           <Route exact path="/two-player-game" component={Game} />
           <Route exact path="/one-player-game" component={OnePlayerGame}/>
         </div>

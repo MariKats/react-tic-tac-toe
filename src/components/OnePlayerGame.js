@@ -47,7 +47,7 @@ export default class OnePlayerGame extends Component {
           gameEnded: true,
           winningCombo: move,
           winner: board[move[0]]
-        }, ()=>console.log(this.state.winningCombo))
+        })
       }
     }
   }
