@@ -26,6 +26,7 @@
   font-size: 30px;
   font-family: 'Permanent Marker', cursive;
   font-style: italic;
+  z-index: 1;
 }
 
 #board {

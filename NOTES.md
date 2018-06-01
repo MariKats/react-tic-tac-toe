@@ -1,5 +1,4 @@
-# refactor
+# refactor - OK
 # responsive layout - OK
-# home page maybe
-# read me
+# read me - OK
 # tests
